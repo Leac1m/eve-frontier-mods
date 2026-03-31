@@ -13,6 +13,9 @@ export function ExtensionCard({ extension }: { extension: ExtensionEntry }) {
       <Flex direction="column" gap="2">
         <Heading size="4">{extension.title}</Heading>
         <Text>{extension.summary}</Text>
+        <Text>
+          Chain status: {extension.chainBacked ? "Live" : "Not detected"} ({extension.chainObjectCount})
+        </Text>
         <Flex gap="2" wrap="wrap">
           {extension.tags.map((tag) => (
             <Badge key={tag} variant="soft">

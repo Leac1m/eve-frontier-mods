@@ -27,6 +27,8 @@ export const BUILT_IN_EXTENSIONS: ExtensionEntry[] = [
       "PLAYER_B_PRIVATE_KEY",
     ],
     source: "catalog",
+    chainBacked: false,
+    chainObjectCount: 0,
   },
   {
     id: "corpse-gate",
@@ -53,5 +55,7 @@ export const BUILT_IN_EXTENSIONS: ExtensionEntry[] = [
       "PLAYER_B_PRIVATE_KEY",
     ],
     source: "catalog",
+    chainBacked: false,
+    chainObjectCount: 0,
   },
 ];

@@ -5,28 +5,38 @@ import { Link } from "react-router-dom";
 import { BUILT_IN_EXTENSIONS } from "../data/extensions-catalog";
 import { usePlayerContext } from "../state/player-context";
 import {
+  fetchOwnedAssemblySummaries,
   fetchOwnedObjectIdsByPackage,
+  fetchOwnedGateReceiptId,
   fetchOwnedObjectIdsByType,
 } from "../queries";
 import { appEnv } from "../config/env";
 
 export function DashboardPage() {
-  const {
-    connectedWalletAddress,
-    effectiveAddress,
-    effectiveLabel,
-    effectiveCharacterItemId,
-  } = usePlayerContext();
+  const { connectedWalletAddress, effectiveAddress, effectiveLabel } =
+    usePlayerContext();
 
   const assemblyType = useMemo(() => {
     if (!appEnv.worldPackageId) return "";
     return `${appEnv.worldPackageId}::assembly::Assembly`;
   }, []);
 
-  const gateReceiptType = useMemo(() => {
-    if (!appEnv.builderPackageId) return "";
-    return `${appEnv.builderPackageId}::paid_gate::GateReceipt`;
-  }, []);
+  const gateReceiptType = useMemo(
+    () =>
+      appEnv.builderPackageId
+        ? `${appEnv.builderPackageId}::paid_gate::GateReceipt`
+        : "",
+    [],
+  );
+
+  const assemblySummaries = useQuery({
+    queryKey: ["dashboard", "assemblySummaries", effectiveAddress, appEnv.worldPackageId],
+    queryFn: () =>
+      effectiveAddress && appEnv.worldPackageId
+        ? fetchOwnedAssemblySummaries(effectiveAddress, appEnv.worldPackageId)
+        : Promise.resolve([]),
+    enabled: Boolean(effectiveAddress && appEnv.worldPackageId),
+  });
 
   const ownedAssemblies = useQuery({
     queryKey: ["dashboard", "assemblies", effectiveAddress, assemblyType],
@@ -55,6 +65,15 @@ export function DashboardPage() {
     enabled: Boolean(effectiveAddress && gateReceiptType),
   });
 
+  const firstReceiptId = useQuery({
+    queryKey: ["dashboard", "firstReceipt", effectiveAddress, appEnv.builderPackageId],
+    queryFn: () =>
+      effectiveAddress && appEnv.builderPackageId
+        ? fetchOwnedGateReceiptId(effectiveAddress, appEnv.builderPackageId)
+        : Promise.resolve(null),
+    enabled: Boolean(effectiveAddress && appEnv.builderPackageId),
+  });
+
   return (
     <Flex direction="column" gap="4">
       <Heading size="7">Dashboard</Heading>
@@ -66,7 +85,7 @@ export function DashboardPage() {
             Active data profile: {effectiveLabel} ({effectiveAddress || "No active address"})
           </Text>
           <Text>
-            Active character item id: {effectiveCharacterItemId || "Not configured in env"}
+            First owned GateReceipt: {firstReceiptId.data || "Not found"}
           </Text>
         </Flex>
       </Card>
@@ -88,13 +107,16 @@ export function DashboardPage() {
 
       <Card>
         <Heading size="4">My Smart Assemblies</Heading>
-        {ownedAssemblies.isLoading ? <Text>Loading assemblies...</Text> : null}
-        {!ownedAssemblies.isLoading && (ownedAssemblies.data?.length || 0) === 0 ? (
+        {assemblySummaries.isLoading ? <Text>Loading assemblies...</Text> : null}
+        {!assemblySummaries.isLoading &&
+        (assemblySummaries.data?.length || 0) === 0 ? (
           <Text>No assemblies found for the active player.</Text>
         ) : null}
         <ul>
-          {(ownedAssemblies.data || []).slice(0, 8).map((id) => (
-            <li key={id}>{id}</li>
+          {(assemblySummaries.data || []).map((assembly) => (
+            <li key={assembly.id}>
+              {assembly.name} ({assembly.state}) - {assembly.id}
+            </li>
           ))}
         </ul>
       </Card>

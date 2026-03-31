@@ -12,6 +12,9 @@ export type ExtensionEntry = {
   guidedSteps: string[];
   requiredEnv: string[];
   source: "catalog" | "community";
+  chainBacked: boolean;
+  chainObjectCount: number;
+  chainObjectType?: string;
 };
 
 export type SubmissionFormData = {

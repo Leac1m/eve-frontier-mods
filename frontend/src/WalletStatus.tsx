@@ -5,13 +5,7 @@ import { usePlayerContext } from "./state/player-context";
 
 export function WalletStatus() {
   const account = useCurrentAccount();
-  const {
-    selectedTestPlayer,
-    setSelectedTestPlayer,
-    effectiveAddress,
-    effectiveLabel,
-    showSelector,
-  } = usePlayerContext();
+  const { effectiveAddress, effectiveLabel } = usePlayerContext();
 
   return (
     <Container my="2" className="wallet-status-panel">
@@ -30,21 +24,6 @@ export function WalletStatus() {
         <Text>Active profile: {effectiveLabel}</Text>
         <Text>Active address: {effectiveAddress || "Not available"}</Text>
       </Flex>
-
-      {showSelector ? (
-        <label className="selector-row">
-          Test Player
-          <select
-            value={selectedTestPlayer}
-            onChange={(event) =>
-              setSelectedTestPlayer(event.target.value === "B" ? "B" : "A")
-            }
-          >
-            <option value="A">Player A</option>
-            <option value="B">Player B</option>
-          </select>
-        </label>
-      ) : null}
 
       <div className="divider" />
 

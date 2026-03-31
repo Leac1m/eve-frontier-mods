@@ -22,3 +22,4 @@ dapps/frontend
 move-contracts/**/build/**/
 
 .ai
+dist

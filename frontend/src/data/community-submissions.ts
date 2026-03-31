@@ -44,6 +44,8 @@ export function saveCommunityExtension(
     guidedSteps: [formData.guidedCommand.trim()],
     requiredEnv: [],
     source: "community",
+    chainBacked: false,
+    chainObjectCount: 0,
   };
 
   const current = getCommunityExtensions();

@@ -10,8 +10,8 @@ export function IntegrationActions({ extension }: { extension: ExtensionEntry })
     <Box className="integration-block">
       <Heading size="4">Guided Integration</Heading>
       <Text>
-        One-click integration is represented as guided script commands in this
-        localnet-safe mode.
+        Direct on-chain action is available for supported extensions. These
+        commands remain as a fallback and operator checklist.
       </Text>
 
       <Flex direction="column" gap="2" className="integration-list">
