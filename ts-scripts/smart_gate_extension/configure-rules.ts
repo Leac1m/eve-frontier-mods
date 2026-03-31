@@ -41,6 +41,17 @@ async function main() {
             ],
         });
 
+        // Set gate price
+        tx.moveCall({
+            target: `${builderPackageId}::${MODULE.PAID_GATE}::set_paid_gate_config`,
+            arguments: [
+                tx.object(extensionConfigId),
+                tx.object(adminCapId),
+                tx.pure.u64(10000),
+                tx.pure.u64(3600000),
+            ],
+        });
+
         const result = await client.signAndExecuteTransaction({
             transaction: tx,
             signer: keypair,

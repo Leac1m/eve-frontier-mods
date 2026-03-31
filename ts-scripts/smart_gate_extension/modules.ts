@@ -3,4 +3,5 @@ export const MODULE = {
     CONFIG: "config",
     CORPSE_GATE_BOUNTY: "corpse_gate_bounty",
     TRIBE_PERMIT: "tribe_permit",
+    PAID_GATE: "paid_gate",
 } as const;

@@ -13,7 +13,12 @@
     "authorise-storage-unit-extension": "tsx ts-scripts/smart_gate_extension/authorise-storage-unit-extension.ts",
     "issue-tribe-jump-permit": "tsx ts-scripts/smart_gate_extension/issue-tribe-jump-permit.ts",
     "jump-with-permit": "tsx ts-scripts/smart_gate_extension/jump-with-permit.ts",
-    "collect-corpse-bounty": "tsx ts-scripts/smart_gate_extension/collect-corpse-bounty.ts"
+    "collect-corpse-bounty": "tsx ts-scripts/smart_gate_extension/collect-corpse-bounty.ts",
+    "create-paid-gate-fee-registry": "tsx ts-scripts/smart_gate_extension/create-paid-gate-fee-registry.ts",
+    "purchase-paid-gate-receipt": "tsx ts-scripts/smart_gate_extension/purchase-paid-gate-receipt.ts",
+    "top-up-paid-gate-receipt": "tsx ts-scripts/smart_gate_extension/top-up-paid-gate-receipt.ts",
+    "issue-paid-jump-permit": "tsx ts-scripts/smart_gate_extension/issue-paid-jump-permit.ts",
+    "withdraw-paid-gate-fees": "tsx ts-scripts/smart_gate_extension/withdraw-paid-gate-fees.ts"
   },
   "dependencies": {
     "@mysten/sui": "^2.0.0",
