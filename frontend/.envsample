@@ -5,4 +5,15 @@ VITE_OBJECT_ID=
 # World package id
 VITE_EVE_WORLD_PACKAGE_ID="0xf115375112eab1dcc1bb4af81a37d47ca7e95c2eb990cefa1f12f82d689e9543"
 
+# Extension package id (smart_gate_extension)
+VITE_BUILDER_PACKAGE_ID=""
+
 VITE_SUI_GRAPHQL_ENDPOINT="https://graphql.testnet.sui.io/graphql"
+
+# Test player toggle for localnet/testnet demos
+VITE_SHOW_TEST_PLAYER_SELECTOR="true"
+VITE_DEFAULT_TEST_PLAYER="A"
+VITE_TEST_PLAYER_A_ADDRESS=""
+VITE_TEST_PLAYER_B_ADDRESS=""
+VITE_TEST_PLAYER_A_CHARACTER_ITEM_ID=""
+VITE_TEST_PLAYER_B_CHARACTER_ITEM_ID=""
