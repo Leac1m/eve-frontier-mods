@@ -18,17 +18,35 @@ function requireItemId(value: number | null, name: string): number {
 }
 
 function buildIssuePaidPermitTransaction(receiptId: string): Transaction {
-  const builderPackageId = requireConfig(appEnv.builderPackageId, "VITE_BUILDER_PACKAGE_ID");
-  const extensionConfigId = requireConfig(appEnv.extensionConfigId, "VITE_EXTENSION_CONFIG_ID");
-  const objectRegistryId = requireConfig(appEnv.objectRegistryId, "VITE_OBJECT_REGISTRY_ID");
-  const worldPackageId = requireConfig(appEnv.worldPackageId, "VITE_EVE_WORLD_PACKAGE_ID");
+  const builderPackageId = requireConfig(
+    appEnv.builderPackageId,
+    "VITE_BUILDER_PACKAGE_ID",
+  );
+  const extensionConfigId = requireConfig(
+    appEnv.extensionConfigId,
+    "VITE_EXTENSION_CONFIG_ID",
+  );
+  const objectRegistryId = requireConfig(
+    appEnv.objectRegistryId,
+    "VITE_OBJECT_REGISTRY_ID",
+  );
+  const worldPackageId = requireConfig(
+    appEnv.worldPackageId,
+    "VITE_EVE_WORLD_PACKAGE_ID",
+  );
 
-  const sourceGateItemId = requireItemId(appEnv.sourceGateItemId, "VITE_SOURCE_GATE_ITEM_ID");
+  const sourceGateItemId = requireItemId(
+    appEnv.sourceGateItemId,
+    "VITE_SOURCE_GATE_ITEM_ID",
+  );
   const destinationGateItemId = requireItemId(
     appEnv.destinationGateItemId,
     "VITE_DESTINATION_GATE_ITEM_ID",
   );
-  const characterItemId = requireItemId(appEnv.characterItemId, "VITE_CHARACTER_ITEM_ID");
+  const characterItemId = requireItemId(
+    appEnv.characterItemId,
+    "VITE_CHARACTER_ITEM_ID",
+  );
 
   const sourceGateId = deriveObjectId(
     objectRegistryId,

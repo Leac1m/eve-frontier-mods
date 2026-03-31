@@ -55,10 +55,9 @@ export type AssemblySummary = {
 async function fetchTypeObjectCount(objectType: string): Promise<number> {
   if (!objectType) return 0;
   const result = await getObjectsByType(objectType, { first: 50 });
-  const nodes =
-    result.data?.objects?.nodes as
-      | Array<{ address?: string | null }>
-      | undefined;
+  const nodes = result.data?.objects?.nodes as
+    | Array<{ address?: string | null }>
+    | undefined;
   return nodes?.length || 0;
 }
 
@@ -101,7 +100,10 @@ export async function fetchOwnedAssemblySummaries(
   if (!walletAddress || !worldPackageId) return [];
 
   const assemblyType = `${worldPackageId}::assembly::Assembly`;
-  const assemblyIds = await fetchOwnedObjectIdsByType(walletAddress, assemblyType);
+  const assemblyIds = await fetchOwnedObjectIdsByType(
+    walletAddress,
+    assemblyType,
+  );
 
   const summaries = await Promise.all(
     assemblyIds.slice(0, 8).map(async (id): Promise<AssemblySummary | null> => {
